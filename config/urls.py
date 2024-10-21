@@ -22,6 +22,7 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("users/", include("hecoto_backend.users.urls", namespace="users")),
+    path("main_app/", include("main_app.urls", namespace="main_app")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     # ...

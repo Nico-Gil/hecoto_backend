@@ -2,6 +2,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.db import models
+from django.utils import timezone
 
 
 class User(AbstractUser):
@@ -12,7 +14,9 @@ class User(AbstractUser):
     """
 
     # First and last name do not cover name patterns around the globe
-    name = CharField(_("Name of User"), blank=True, max_length=255)
+    name = CharField(("Name of User"), blank=True, max_length=255)
+    create_at = models.DateTimeField(verbose_name=_('Create at'), auto_now_add=True, )
+    update_at = models.DateTimeField(verbose_name=_('Update at'), auto_now=True, )
     first_name = None  # type: ignore[assignment]
     last_name = None  # type: ignore[assignment]
 
@@ -24,3 +28,4 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"username": self.username})
+    
